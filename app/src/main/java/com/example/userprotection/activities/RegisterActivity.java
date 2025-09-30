@@ -51,27 +51,32 @@ public class RegisterActivity extends AppCompatActivity {
         String password  = etPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Email and password required", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Email và mật khẩu là bắt buộc", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        RegisterRequest request = new RegisterRequest(1, firstName, lastName, email, password);
+        // Nếu muốn user mặc định KHÔNG thuộc tenant nào → tenantId = null
+        RegisterRequest request = new RegisterRequest(null, firstName, lastName, email, password);
 
         apiService.register(request).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     finish();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Register failed: " + response.message(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this,
+                            "Đăng ký thất bại: " + response.message(),
+                            Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this,
+                        "Lỗi kết nối: " + t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
