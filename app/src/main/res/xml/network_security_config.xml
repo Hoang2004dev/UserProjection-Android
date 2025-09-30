@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Áp dụng mặc định cho mọi domain -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <!-- Trust CA hệ thống (Let's Encrypt, DigiCert, v.v.) -->
+            <certificates src="system" />
+            <!-- Trust cert người dùng tự cài (self-signed dev cert) -->
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Cấu hình riêng cho API backend -->
+    <domain-config cleartextTrafficPermitted="false">
+        <!-- Dùng khi gọi API qua emulator -->
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <!-- Nếu bạn test trên máy thật, thay localhost bằng IP LAN -->
+        <domain includeSubdomains="true">localhost</domain>
+    </domain-config>
+</network-security-config>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">UserProtection</string>
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="no_account_register">No account? Register</string>
+
+    <!-- Register -->
+    <string name="register">Register</string>
+    <string name="already_have_account">Already have account? Login</string>
+
+    <!-- Main -->
+    <string name="welcome">Welcome!</string>
+    <string name="logout">Logout</string>
+</resources>
